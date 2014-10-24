@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/formularze.css" type="text/css" >
         <title> Szybki kurs HTML - Budowanie formularzy</title>
     </head>
 
@@ -13,20 +14,32 @@
                 <h2>Szybki kurs</h2>
             </div>
             <div id="menu">
-                <a href="index.html">Podstawowe znaczniki</a>
-                <a href="tabele.html">Budowa tabel</a>
-                <a href="formularze.html">Tworzenie formularzy</a>
+                <a href="index.html">Podstawowe znaczniki</a> 
+                <a href="tabele.html">Tworzenie tabel</a> 
+                <a href="formularze.html">Budowa formularzy</a>  
             </div>
             <div id="tresc">
                 <div> 
                     <form action="index.html" method="post"> 
                         <br />
-                        Podaj login : <input type="text" name="login"/> <br /> 
-                        Podaj hasło: <input type="password" name="pass"/> <br /><br /> 
+                        <label for="imie">Imie : </label>  <input id="imie" type="text" name="login"/><br /> 
+                        <label for="nazwisko">Nazwisko: </label> <input id="nazwisko" type="password" name="pass"/><br /> 
+                        <label for="nazwisko">Email: </label> <input id="email" type="text" name="pass"/><br /><br /> 
                         Wybierz ulubione języki programowania: <br /> 
                         <input type="checkbox" name="C" value="C" /> Język C/C++
                         <input type="checkbox" name="Java" value="J" /> Język Java 
                         <input type="checkbox" name="PHP" value="PHP" /> Język PHP <br /> 
+
+                        <select id="select_hobby" name="hobby"> 
+                            <option value="t">Turystyka</option> 
+                            <option value="m">Muzyka</option> 
+                            <option value="f">Film</option> 
+                            <option value="s">Sport</option> 
+                            <option value="i">Inne</option> 
+                        </select><br />
+                        Wybierz przeglądarkę, z której korzystasz najczęściej: <br /> 
+                        <label for="ff">Firefox</label><input id="ff" type="radio" name="przegladarka" value="Ff" /> <br /> 
+                        <label for="ff">Chrome </label><input type="radio" name="przegladarka" value="Ch" /><br /> 
                         <input type="submit" value="Wyślij" /> 
                         <input type="reset" value="Wyczyść" /> 
                     </form> 
@@ -35,7 +48,6 @@
                 <p> <a href="http://validator.w3.org/">HTML walidator 
                         <img src="http://www.w3.org/Icons/WWW/w3c_home_nb" alt="Walidator" /> </a> 
                 </p>
-
             </div>
             <div id="stopka">&copy;BP 2014</div>
         </div>
