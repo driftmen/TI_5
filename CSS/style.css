@@ -32,8 +32,8 @@ h1,h2, #stopka {
 }
 /*pozycjonowanie elementów: */ 
 #menu { 
-    float:left; 
-    width:16%; 
+    /*float:left;*/ 
+    /*width:16%;*/ 
     padding:1%; 
 } 
 #tresc { 
