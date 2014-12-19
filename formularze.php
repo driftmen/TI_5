@@ -20,14 +20,14 @@
             </div>
             <div id="tresc">
                 <div> 
-                    <form action="index.html" method="post"> 
+                    <form action="formularze.php" method="get"> 
                         <br />
                         <label for="imie">Imie : </label>  <input id="imie" type="text" name="login"/><br /> 
-                        <label for="nazwisko">Nazwisko: </label> <input id="nazwisko" type="password" name="pass"/><br /> 
-                        <label for="nazwisko">Email: </label> <input id="email" type="text" name="pass"/><br /><br /> 
+                        <label for="nazwisko">Nazwisko: </label> <input id="nazwisko" type="text" name="nazw"/><br /> 
+                        <label for="nazwisko">Email: </label> <input id="email" type="text" name="mail"/><br /><br /> 
                         Wybierz ulubione języki programowania: <br /> 
                         <input type="checkbox" name="C" value="C" /> Język C/C++
-                        <input type="checkbox" name="Java" value="J" /> Język Java 
+                        <input type="checkbox" name="Java" value="Java" /> Język Java 
                         <input type="checkbox" name="PHP" value="PHP" /> Język PHP <br /> 
 
                         <select id="select_hobby" name="hobby"> 
@@ -44,7 +44,44 @@
                         <input type="reset" value="Wyczyść" /> 
                     </form> 
                 </div>   
+                <div> 
+                    <?php
+                    echo '<h2>Dane odebrane z formularza:</h2>';
+                    if (isset($_REQUEST['login']) && ($_REQUEST['login'] != "")) {
+                        $imie = htmlspecialchars(trim($_REQUEST['login']));
+                        echo 'Imie:' . $imie . '<br />';
+                    }
+                    else
+                        echo 'Nie wpisano imienia <br />';
 
+                    if (isset($_REQUEST['nazw']) && ($_REQUEST['nazw'] != "")) {
+                        $nazwisko = htmlspecialchars(trim($_REQUEST['nazw']));
+                        echo 'Nazwisko:' . $nazwisko . '<br />';
+                    }
+                    else
+                        echo 'Nie wpisano nazwiska <br />';
+
+
+                    if (isset($_REQUEST['mail']) && ($_REQUEST['mail'] != "")) {
+                        $mail = htmlspecialchars(trim($_REQUEST['mail']));
+                        echo 'Mail:' . $mail . '<br />';
+                    }
+                    else
+                        echo 'Nie wpisano maila <br />';
+
+                    echo "Zamowienie: ";
+
+                    $wynik = "";
+                    $array = array("C", "Java", "PHP");
+                    foreach ($array as $opcja) {
+                        if (isset($_REQUEST["$opcja"]) && ($_REQUEST["$opcja"] != "")) {
+                            $opcja = htmlspecialchars(trim($_REQUEST["$opcja"]));
+                            echo $opcja;
+                        }
+                    }
+                    echo $wynik;
+                    ?> 
+                </div>
                 <p> <a href="http://validator.w3.org/">HTML walidator 
                         <img src="http://www.w3.org/Icons/WWW/w3c_home_nb" alt="Walidator" /> </a> 
                 </p>
