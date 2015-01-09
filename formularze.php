@@ -24,6 +24,7 @@
                         <br />
                         <label for="imie">Imie : </label>  <input id="imie" type="text" name="login"/><br /> 
                         <label for="nazwisko">Nazwisko: </label> <input id="nazwisko" type="text" name="nazw"/><br /> 
+                        <label for="wiek">Wiek: </label> <input id="wiek" type="number" name="wiek"/><br /> 
                         <label for="nazwisko">Email: </label> <input id="email" type="text" name="mail"/><br /><br /> 
                         Wybierz ulubione języki programowania: <br /> 
                         <input type="checkbox" name="C" value="C" /> Język C/C++
@@ -40,46 +41,52 @@
                         Wybierz przeglądarkę, z której korzystasz najczęściej: <br /> 
                         <label for="ff">Firefox</label><input id="ff" type="radio" name="przegladarka" value="Ff" /> <br /> 
                         <label for="ff">Chrome </label><input type="radio" name="przegladarka" value="Ch" /><br /> 
-                        <input type="submit" value="Wyślij" /> 
+                        <input type="submit" name="send" value="Dodaj" /> 
+                        <input type="submit" name="show" value="Pokaz" /> 
+                        <input type="submit" name="java" value="Java" />                         
                         <input type="reset" value="Wyczyść" /> 
                     </form> 
                 </div>   
                 <div> 
                     <?php
-                    echo '<h2>Dane odebrane z formularza:</h2>';
-                    if (isset($_REQUEST['login']) && ($_REQUEST['login'] != "")) {
-                        $imie = htmlspecialchars(trim($_REQUEST['login']));
-                        echo 'Imie:' . $imie . '<br />';
+                    include_once 'include/function.php';
+                    $file = "baza.txt";
+                    if (isset($_REQUEST['send'])) {
+                        $dane = getAndPrintParam();
+                        $dane = date('Y-m-d H:i:s') . " " . $dane;
+
+                        $fp = fopen($file, "a");
+                        flock($fp, 2);
+                        fwrite($fp, $dane);
+                        flock($fp, 3);
+                        fclose($fp);
                     }
-                    else
-                        echo 'Nie wpisano imienia <br />';
 
-                    if (isset($_REQUEST['nazw']) && ($_REQUEST['nazw'] != "")) {
-                        $nazwisko = htmlspecialchars(trim($_REQUEST['nazw']));
-                        echo 'Nazwisko:' . $nazwisko . '<br />';
-                    }
-                    else
-                        echo 'Nie wpisano nazwiska <br />';
-
-
-                    if (isset($_REQUEST['mail']) && ($_REQUEST['mail'] != "")) {
-                        $mail = htmlspecialchars(trim($_REQUEST['mail']));
-                        echo 'Mail:' . $mail . '<br />';
-                    }
-                    else
-                        echo 'Nie wpisano maila <br />';
-
-                    echo "Zamowienie: ";
-
-                    $wynik = "";
-                    $array = array("C", "Java", "PHP");
-                    foreach ($array as $opcja) {
-                        if (isset($_REQUEST["$opcja"]) && ($_REQUEST["$opcja"] != "")) {
-                            $opcja = htmlspecialchars(trim($_REQUEST["$opcja"]));
-                            echo $opcja;
+                    if (isset($_REQUEST['show'])) {
+                        $lines = file($file);
+                        foreach ($lines as $line) {
+                            echo $line . "<br/>";
                         }
                     }
-                    echo $wynik;
+
+                    if (isset($_REQUEST['java'])) {
+                        $lines = file($file);
+                        foreach ($lines as $line) {
+                            if (strstr($line, 'Java'))
+                                echo $line . "<br/>";
+                        }
+                    }
+
+                    if (isset($_REQUEST['statystyki'])) {
+                        $lines = file($file);
+                        $ilosc=0;
+                        $mlodzi=0;
+                        $starzy=0;
+                        foreach ($lines as $line) {
+                            if (strstr($line, 'Java'))
+                                echo $line . "<br/>";
+                        }
+                    }
                     ?> 
                 </div>
                 <p> <a href="http://validator.w3.org/">HTML walidator 
@@ -90,3 +97,5 @@
         </div>
     </body>
 </html>
+
+
